@@ -1,13 +1,13 @@
 import React from 'react'
 import { css } from '@emotion/css'
-import { itemThumbnailProps } from './itemThumbnail.types'
+import { ItemThumbnailProps } from './itemThumbnail.types'
 
 function ItemThumbnail({
   episode,
   cover,
   title,
   id
-}:itemThumbnailProps):React.ReactElement<itemThumbnailProps> {
+}:ItemThumbnailProps):React.ReactElement<ItemThumbnailProps> {
   const thumbnail = css`
     margin: 1%;
     border-radius: 10px;
@@ -41,6 +41,7 @@ function ItemThumbnail({
       }
     }
   `
+  console.log('rerender', title)
   return (
     <div className={thumbnail}>
       <img src={cover} alt="anime" />

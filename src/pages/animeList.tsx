@@ -1,6 +1,8 @@
 import React from 'react'
 import { useQuery, gql } from '@apollo/client';
 import ItemThumbnail from '../components/itemThumbnail/itemThumbnail';
+import Pagination from '../components/pagination/pagination';
+import { css } from '@emotion/css'
 
 const GET_ANIME_LIST =  gql`
     query ($page: Int, $perPage: Int) {
@@ -45,22 +47,38 @@ interface Anime {
       }
       episodes: number;
     }]
+    pageInfo: {
+      lastPage: number;
+    }
   }
 }
 
 function AnimeList() {
-  const { loading, data } = useQuery<Anime, AnimeOption> (
+  const perPage = 10;
+  const [page, setPage] = React.useState(1)
+  const { fetchMore, loading, data } = useQuery<Anime, AnimeOption> (
     GET_ANIME_LIST,
-    { variables: { page: 1, perPage: 10 } }
+    { variables: { page: page, perPage } }
   );
+
+
+
+  async function changePage(n: number) {
+    setPage(n)
+    await fetchMore({variables: { page: n, perPage}})
+  }
+
+  const animeListStyle = css`
+    text-align: center;
+  `
   console.log(data)
   return (
-    <div>
+    <div className={animeListStyle}>
       {loading && (
         <div>loading</div>
       )}
       {
-        !loading && data && data.Page.media.map(item => (
+        !loading && data && data.Page && data.Page.media.map(item => (
           <ItemThumbnail
             key={item.id}
             cover={item.coverImage.large}
@@ -71,6 +89,11 @@ function AnimeList() {
         )
         )
       }
+      <Pagination
+        currentPage={page}
+        pageLength={data ? data.Page.pageInfo.lastPage : 0}
+        onChange={changePage}
+      />
     </div>
   )
 

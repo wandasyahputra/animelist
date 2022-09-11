@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BrowserRouter } from 'react-router-dom';
 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
 
 const client = new ApolloClient({
   uri: 'https://graphql.anilist.co',

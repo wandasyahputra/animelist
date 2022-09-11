@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface itemThumbnailProps {
+export interface ItemThumbnailProps {
   cover: string;
   episode: number;
   title: string;
