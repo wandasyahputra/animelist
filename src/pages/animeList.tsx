@@ -49,16 +49,20 @@ interface Anime {
 }
 
 function AnimeList() {
-  const { data } = useQuery<Anime, AnimeOption> (
+  const { loading, data } = useQuery<Anime, AnimeOption> (
     GET_ANIME_LIST,
     { variables: { page: 1, perPage: 10 } }
   );
   console.log(data)
   return (
     <div>
+      {loading && (
+        <div>loading</div>
+      )}
       {
-        data && data.Page.media.map(item => (
+        !loading && data && data.Page.media.map(item => (
           <ItemThumbnail
+            key={item.id}
             cover={item.coverImage.large}
             title={item.title.romaji}
             id={item.id}

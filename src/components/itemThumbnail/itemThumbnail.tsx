@@ -9,15 +9,21 @@ function ItemThumbnail({
   id
 }:itemThumbnailProps):React.ReactElement<itemThumbnailProps> {
   const thumbnail = css`
-    margin: 5px;
+    margin: 1%;
     border-radius: 10px;
     overflow: hidden;
     position: relative;
-    width: 100%;
+    width: 48%;
     max-width: 230px;
     height: 100vh;
     max-height: 300px;
-    box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+    box-shadow: 0px 5px 5px rgb(0 0 0 / 10%);
+    display: inline-block;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
     .information {
       position: absolute;
       color: white;
