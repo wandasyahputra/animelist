@@ -6,7 +6,8 @@ function ItemThumbnail({
   episode,
   cover,
   title,
-  id
+  id,
+  mode = "collection"
 }:ItemThumbnailProps):React.ReactElement<ItemThumbnailProps> {
   const thumbnail = css`
     margin: 1%;
@@ -46,7 +47,7 @@ function ItemThumbnail({
     <div className={thumbnail}>
       <img src={cover} alt="anime" />
       <div className="information">
-        <div className="episodes">Episodes {episode}</div>
+        <div className="episodes">{mode === 'collection' ? episode + ' in list' : 'Episodes ' + episode}</div>
         <div className="title">{title}</div>
       </div>
     </div>

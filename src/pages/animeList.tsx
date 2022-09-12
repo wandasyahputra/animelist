@@ -78,7 +78,7 @@ function AnimeList() {
         <div>loading</div>
       )}
       {
-        !loading && data && data.Page && data.Page.media.map(item => (
+        data && data.Page.media.map(item => (
           <ItemThumbnail
             key={item.id}
             cover={item.coverImage.large}
@@ -86,8 +86,7 @@ function AnimeList() {
             id={item.id}
             episode={item.episodes}
           />
-        )
-        )
+        ))
       }
       <Pagination
         currentPage={page}

@@ -5,4 +5,5 @@ export interface ItemThumbnailProps {
   episode: number;
   title: string;
   id: number;
+  mode?: "anime"|"collection"
 }
