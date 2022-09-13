@@ -1,4 +1,4 @@
-import React, {MouseEvent} from 'react'
+import React, { MouseEvent } from 'react'
 import { css } from '@emotion/css'
 import ReactDOM from 'react-dom'
 import { ModalPortalProps, ModalProps } from './modal.types'
@@ -19,11 +19,13 @@ function Modal({
     height: 100%;
     transition: .3s;
     opacity: 0;
+    overflow: scroll;
     background: rgba(255,255,255,0.3);
     .modalContainer {
       position: absolute;
+      display: flex;
+      max-height: 85vh;
       width: 80%;
-      height: 40px;
       background-color: ${backgroundColor};
       color: ${textColor};
       left: calc(10% - 10px);

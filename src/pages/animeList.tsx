@@ -1,34 +1,9 @@
 import React from 'react'
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import ItemThumbnail from '../components/itemThumbnail/itemThumbnail';
 import Pagination from '../components/pagination/pagination';
 import { css } from '@emotion/css'
-
-const GET_ANIME_LIST =  gql`
-    query ($page: Int, $perPage: Int) {
-      Page (page: $page, perPage: $perPage) {
-        pageInfo {
-          total
-          currentPage
-          lastPage
-          hasNextPage
-          perPage
-        }
-        media {
-          id
-          title {
-            romaji
-          }
-          episodes
-          coverImage {
-            medium
-            large
-            color
-          }
-        }
-      }
-    }
-    `
+import { GET_ANIME_LIST } from '../components/query';
 
 interface AnimeOption {
   page: number;
@@ -71,7 +46,6 @@ function AnimeList() {
   const animeListStyle = css`
     text-align: center;
   `
-  console.log(data)
   return (
     <div className={animeListStyle}>
       {loading && (

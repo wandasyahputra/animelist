@@ -1,7 +1,6 @@
 import React from 'react'
 import ItemThumbnail from '../components/itemThumbnail/itemThumbnail';
 import { css } from '@emotion/css'
-import Modal from '../components/modal/modal';
 import ModalCreate from './modalCreate';
 
 interface CollectionProp {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface ItemThumbnailProps {
   cover: string;
   episode: number;

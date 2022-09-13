@@ -1,5 +1,3 @@
-import React from 'react'
-
 export interface PaginationProps {
   pageLength: number;
   currentPage: number;
