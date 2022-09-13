@@ -3,11 +3,6 @@ import ItemThumbnail from '../components/itemThumbnail/itemThumbnail';
 import { css } from '@emotion/css'
 import Modal from '../components/modal/modal';
 
-interface AnimeOption {
-  page: number;
-  perPage: number;
-}
-
 interface CollectionProp {
   title: string;
   cover: string;
@@ -17,17 +12,15 @@ interface CollectionProp {
 
 function CollectionList() {
   const [data, setData] = React.useState<Array<CollectionProp>>([])
-  const [showModal, setShowModal] = React.useState<Boolean>(false)
+  const [showModal, setShowModal] = React.useState<boolean>(true)
   
   function getCollection() {
     const collection = localStorage.getItem('collectionList') !== null ?
       localStorage.getItem('collectionList') as string : '[]' 
     setData(JSON.parse(collection))
   }
-  function toggleModal() {
-    setShowModal((prev) => {
-      return !prev
-    })
+  function toggleModal(value:boolean) {
+    setShowModal(value)
   }
 
   React.useEffect(() => {
@@ -39,8 +32,13 @@ function CollectionList() {
   `
   return (
     <div className={collectionListStyle}>
-      <Modal />
-      <div onClick={toggleModal}>add</div>
+      <Modal
+        show={showModal}
+        close={toggleModal}
+      >
+        test
+      </Modal>
+      <div onClick={()=> toggleModal(true)}>add</div>
       {data.map(item => 
         <ItemThumbnail
           episode={item.numberIn}

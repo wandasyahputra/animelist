@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/css'
 import { ItemThumbnailProps } from './itemThumbnail.types'
+import { textColor } from '../../assets/var'
 
 function ItemThumbnail({
   episode,
@@ -27,7 +28,7 @@ function ItemThumbnail({
     }
     .information {
       position: absolute;
-      color: white;
+      color: ${textColor};
       top: 0px;
       height: 100%;
       width: 100%;

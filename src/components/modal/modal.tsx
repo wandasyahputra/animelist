@@ -1,30 +1,77 @@
-import React from 'react'
+import React, {MouseEvent} from 'react'
 import { css } from '@emotion/css'
 import ReactDOM from 'react-dom'
+import { ModalPortalProps, ModalProps } from './modal.types'
+import { backgroundColor, textColor } from '../../assets/var'
 
-function Modal () {
-const modalStyle = css`
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.3)
-`
+function Modal({
+  show,
+  children,
+  close
+}:ModalProps):React.ReactElement<ModalPortalProps> {
+  const [modalCName, setModalCName] = React.useState<string>('')
+  const [showModal, setShowModal] = React.useState<boolean>(false)
+  const modalStyle = css`
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    transition: .3s;
+    opacity: 0;
+    background: rgba(255,255,255,0.3);
+    .modalContainer {
+      position: absolute;
+      width: 80%;
+      height: 40px;
+      background-color: ${backgroundColor};
+      color: ${textColor};
+      left: calc(10% - 10px);
+      top: 40px;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    &.show {
+      opacity: 1
+    }
+  `
+  React.useEffect(() => {
+    if(show) {
+      setShowModal(true)
+      setTimeout(()=> {
+        setModalCName('show')
+      },10)
+    } else {
+      setModalCName('')
+      setTimeout(() => {
+        setShowModal(false)
+      }, 300)
+    }
+  },[show])
+
+  function handleClickOutside(e:MouseEvent ) {
+    if (e.target === e.currentTarget) {
+      close(false)
+    }
+  }
 
   return (
     <ModalPortal>
-      <div className={modalStyle}>
-        modal
-      </div>
+      {showModal && (
+        <div className={`${modalCName} ${modalStyle}`} onClick={handleClickOutside}>
+          <div className='modalContainer'>
+            {children}
+          </div>
+        </div>
+      )}
     </ModalPortal>
   )
 }
 
-function ModalPortal(props: { children: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined }) {
+function ModalPortal({ children }: ModalPortalProps):React.ReactElement<ModalPortalProps> {
   const root = document.getElementsByTagName('body')[0]
   return ReactDOM.createPortal(
-    props.children,
+    children,
     root
   )
 }
