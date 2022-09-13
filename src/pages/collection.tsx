@@ -2,6 +2,7 @@ import React from 'react'
 import ItemThumbnail from '../components/itemThumbnail/itemThumbnail';
 import { css } from '@emotion/css'
 import Modal from '../components/modal/modal';
+import ModalCreate from './modalCreate';
 
 interface CollectionProp {
   title: string;
@@ -32,12 +33,10 @@ function CollectionList() {
   `
   return (
     <div className={collectionListStyle}>
-      <Modal
+      <ModalCreate
         show={showModal}
         close={toggleModal}
-      >
-        test
-      </Modal>
+      />
       <div onClick={()=> toggleModal(true)}>add</div>
       {data.map(item => 
         <ItemThumbnail
